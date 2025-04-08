@@ -41,10 +41,10 @@ def transform_data(ti: TaskInstance):
 
 
 def insert_on_postgres(ti: TaskInstance):
-    """Fucntion to insert data retrived from the API on a postgres database
+    """Function to insert data retrieved from the API on a postgres database
 
     Args:
-        task_instace (TaskInstance): Contains information from the steps of a DAG
+        ti (TaskInstance): Contains information from the steps of a DAG
     """
     data: list[list] = ti.xcom_pull(task_ids="transform_data", key="parsed_data")
     # convert for sql insert
@@ -119,4 +119,5 @@ with DAG(
         task_id="load_data", python_callable=insert_on_postgres
     )
 
+    # define pipeline order
     verify_api_task >> get_data_task >> transform_data_task >> create_table_task >> insert_data_task
