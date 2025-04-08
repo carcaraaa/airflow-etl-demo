@@ -1,0 +1,7 @@
+apache-airflow
+apache-airflow-providers-postgres
+apache-airflow-providers-http
+pandas
+requests
+fastapi
+uvicorn
